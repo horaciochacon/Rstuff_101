@@ -40,18 +40,23 @@ gg <- gg + geom_segment(data=df, aes(y=Departamento, yend=Departamento, x=0, xen
 # se define el grosor de la línea "size", el tamaño de "x" y "xend" así como sus respectivos colores
 gg <- gg + geom_dumbbell(data=df, aes(y=Departamento, x=JNC, xend=AHA),
                          size=1.5, color="#b2b2b2", size_x = 5, size_xend = 5, colour_x ="#9fb059", colour_xend ="#edae52")
-# text below points
+
+# Agrega las etiquetas correspondiente a "x" y "xend"
 gg <- gg + geom_text(data=filter(df, Departamento=="Amazonas"),
                      aes(x=JNC, y=Departamento, label="JNC"),
                      color="#9fb059", size=5, vjust=-2, fontface="bold", family="Calibri")
 gg <- gg + geom_text(data=filter(df, Departamento=="Amazonas"),
                      aes(x=AHA, y=Departamento, label="AHA"),
                      color="#edae52", size=5, vjust=-2, fontface="bold", family="Calibri")
-# text above points
+
+# Agrega las etiquetas de datos para "x" y "xend" utilizando la función creada "percent_first" que
+# toma el valor numérico y lo devuelve como string. Nótese el uso del mismo color que el punto
+# utilizado den geom_dumbell y la justificación vertical "vjust" para que se vea bien
 gg <- gg + geom_text(data=df, aes(x=JNC, y=Departamento, label=percent_first(JNC)),
                      color="#9fb059", size=2.75, vjust=2, family="Calibri")
 gg <- gg + geom_text(data=df, color="#edae52", size=2.75, vjust=2, family="Calibri",
                      aes(x=AHA, y=Departamento, label=percent_first(AHA)))
+
 # difference column
 gg <- gg + geom_rect(data=df, aes(xmin= 0.5, xmax= 0.6, ymin=-Inf, ymax=Inf), fill="#efefe3")
 gg <- gg + geom_text(data=df, aes(label=diff, y=Departamento, x= 0.55), fontface="bold", size=3, family="Calibri")
