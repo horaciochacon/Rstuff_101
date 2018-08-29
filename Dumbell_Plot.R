@@ -57,23 +57,48 @@ gg <- gg + geom_text(data=df, aes(x=JNC, y=Departamento, label=percent_first(JNC
 gg <- gg + geom_text(data=df, color="#edae52", size=2.75, vjust=2, family="Calibri",
                      aes(x=AHA, y=Departamento, label=percent_first(AHA)))
 
-# difference column
+# Crea un rectangulo con dimensiones las dimensiones especificadas y el color "fill"
 gg <- gg + geom_rect(data=df, aes(xmin= 0.5, xmax= 0.6, ymin=-Inf, ymax=Inf), fill="#efefe3")
+
+# Agrega el valor diff por cada uno de los "y"
 gg <- gg + geom_text(data=df, aes(label=diff, y=Departamento, x= 0.55), fontface="bold", size=3, family="Calibri")
+
+# Agrega el título del segmento de diferencial
 gg <- gg + geom_text(data=filter(df, Departamento=="Amazonas"), aes(x=0.55, y=Departamento, label="DIFF"),
                      color="#7a7d7e", size=3.1, vjust=-2, fontface="bold", family="Calibri")
+
+# Define correctamente la escala del eje horizontal de 0 a 0.65
 gg <- gg + scale_x_continuous(expand=c(0,0), limits=c(0, 0.65))
+
+# Igual pero define la expansión entre los valores de y para que no estén tan pegados
 gg <- gg + scale_y_discrete(expand=c(0.075,0))
-gg <- gg + labs(x=NULL, y=NULL, title="Título",
-                subtitle="Subtítulo")
+
+# Títulos y subtítulos
+gg <- gg + labs(x=NULL, y=NULL, title="Título", subtitle="Subtítulo")
+
+# Cambia a un tema más amigable que permitirá que se vea mejor (no fondo gris)
 gg <- gg + theme_bw(base_family="Calibri")
+
+# Elimina las grillas menores y mayores que por defecto ggplot2 tiene
 gg <- gg + theme(panel.grid.major=element_blank())
 gg <- gg + theme(panel.grid.minor=element_blank())
+
+# Elimina el borde negro del gráfico
 gg <- gg + theme(panel.border=element_blank())
+
+# Agranda el tamaño de las etiquetas de "y"
 gg <- gg + theme(axis.text.y = element_text(size=16))
+
+# Elimina las marcas (ticks) de los ejes (tanto "y" como "x")
 gg <- gg + theme(axis.ticks=element_blank())
+
+# Elimina las etiquetas del eje horizontal
 gg <- gg + theme(axis.text.x=element_blank())
+
+# Convierte el título a negrita
 gg <- gg + theme(plot.title=element_text(face="bold"))
+
+# Pone el subtítulo en itálica (cursiva)
 gg <- gg + theme(plot.subtitle=element_text(face="italic", size=9, margin=margin(b=12)))
-gg <- gg + theme(plot.caption=element_text(size=7, margin=margin(t=12), color="#7a7d7e"))
+
 gg
