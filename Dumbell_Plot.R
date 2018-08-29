@@ -1,8 +1,8 @@
 library(ggplot2) # devtools::install_github("hadley/ggplot2")
 library(ggalt)   # devtools::install_github("hrbrmstr/ggalt")
-library(dplyr)   # for data_frame() & arrange()
+library(dplyr)   # Para poder usar data_frame() & arrange()
 
-# I'm not crazy enough to input all the data; this will have to do for the example
+# Se puede usar directamente una data frame 
 df <- data_frame(Departamento=c("Amazonas", "Ancash", "Apurimac", "Arequipa", "Ayacucho", "Cajamarca",
                            "Callao", "Cusco", "Huancavelica", "Huanuco", "Ica", "Junin",
                            "La Libertad", "Lambayeque", "Lima", "Loreto", "Madre de Dios", "Moquegua",
